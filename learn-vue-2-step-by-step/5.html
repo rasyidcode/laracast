@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tuts #5 - Attribut And ClassName Binding</title>
+    <style>
+    .red-button { background-color: red; }
+    .green-button { background-color: green; }
+    .is-loading { background-color: blue; }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <button :title="title">Hover me</button>
+        <button :class="className" @click="changeColor">Red Button</button>
+        <button :class="{ 'is-loading': isLoading }" @click="toggleClass">Loading</button>
+        <button :disabled="isDisable" @click="toggleClass2">This is disabled</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#root',
+            data: {
+                title: 'This is from javascript vue',
+                className: 'red-button',
+                isLoading: false,
+                isDisable: false
+            },
+            methods: {
+                changeColor() {
+                    if (this.className == 'red-button') {
+                        this.className = 'green-button'
+                    } else {
+                        this.className = 'red-button'
+                    }
+                },
+                toggleClass() {
+                    this.isLoading = !this.isLoading
+                    this.isDisable = false
+                },
+                toggleClass2() {
+                    this.isDisable = !this.isDisable
+                }
+            }
+        })
+    </script>
+</body>
+</html>
