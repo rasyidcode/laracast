@@ -1,0 +1,13 @@
+# create model with migration & its controller
+command: php artisan make:model -mr
+command: php artisan make:model -mc
+
+# generate fake data on tinker
+/* generate on threads */
+factory('App\Thread', 50)->create()
+
+/* generate on replay */
+$threads = factory('App\Thread', 50)->create();
+$threads->each(function($thread) {
+    factory('App\Reply', 10)->create(['thread_id' => $thread->id]);
+});
