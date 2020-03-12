@@ -17,6 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('skills', function() {
-    return ['Laravel', 'PHP', 'Testing', 'Bootstrap', 'Hello'];
-});
+Route::resources(['projects' => 'ProjectsController']);
