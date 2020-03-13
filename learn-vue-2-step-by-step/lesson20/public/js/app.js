@@ -26,19 +26,36 @@ class Errors {
     }
 }
 
+class Form {
+
+    constructor(data) {
+        this.data = data;
+
+        for (let field in data) {
+            this[field] = data[field]
+        }
+    }
+
+    clear() {
+        
+    }
+}
+
 
 new Vue({
     el: '#app',
 
     data: {
-        name: '',
-        desc: '',
-        errors: {}
+        form: new Form({
+            name: '',
+            desc: ''
+        }),
+        errors: new Errors()
     },
 
     methods: {
         onSubmit() {
-            axios.post('/projects', this.$data)
+            axios.post('/projects', this.form.data)
                 .then(this.onSuccess)
                 .catch(err => this.errors.record(err.response.data.errors))
         },
