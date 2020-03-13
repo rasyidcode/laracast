@@ -36,14 +36,12 @@ class ProjectsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $data = $request->only(['name', 'desc']);
-
-        $request->validate($data, [
-            'name' => 'required',
-            'desc' => 'required'
+        $validatedData = $request->validate([
+            'name' => ['required'],
+            'desc' => ['required'],
         ]);
 
-        Project::forceCreate($data);
+        Project::forceCreate($validatedData);
 
         return ['message' => 'Project created!'];
     }
